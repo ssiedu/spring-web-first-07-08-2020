@@ -1,18 +1,14 @@
-<%
-	int amount=(Integer)request.getAttribute("amt");
-	int interest=(Integer)request.getAttribute("intr");
-	int net=(Integer)request.getAttribute("net");
-%>
-
-
+<%@page isELIgnored="false" %>
 <html>
 <body>
 	<h3>Interest Details</h3>
 	<hr>
 		<pre>
-		Amount		<%=amount%>
-		Interest	<%=interest%>
-		Net		<%=net%>
+		Amount		${resobj.amount}
+		Time		${resobj.time}
+		Rate		${resobj.rate}
+		Interest	${resobj.interest}
+		Net		${resobj.net}
 		</pre>		
 	<hr>
 </body>

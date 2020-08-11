@@ -17,9 +17,28 @@ public class BankingController {
 		return "inputpage.jsp";	//view-name
 		
 	}
+	
+@RequestMapping("compute")	//here we will provide the response using a view (result.jsp).
+	
+	public ModelAndView computeInterest(@RequestParam("t1") int amount, @RequestParam("t2") int time) {	//the value of request parameter t1 should be stored to amount, t2 to time
+	
+		InterestModel model=new InterestModel();
+		model.setAmount(amount);
+		model.setTime(time);
+		InterestService service=new InterestService();
+		service.computeInterest(model);
+		
+		
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("result.jsp");
+		mv.addObject("resobj", model);
+		return mv;
+		
+	}
+	/*
 	@RequestMapping("compute")	//here we will provide the response using a view (result.jsp).
 	
-	public ModelAndView computeInterest(@RequestParam("t1") int amount, @RequestParam("t2") int time, HttpServletResponse response) {	//the value of request parameter t1 should be stored to amount, t2 to time
+	public ModelAndView computeInterest(@RequestParam("t1") int amount, @RequestParam("t2") int time) {	//the value of request parameter t1 should be stored to amount, t2 to time
 	
 		int interest=(amount*time*8)/100;
 		int net=amount+interest;
@@ -27,13 +46,14 @@ public class BankingController {
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("result.jsp");
 		//store the proceed data to this ModelAndView object
-		mv.addObject("amt", amount);
+		mv.addObject("amt", amount);				//the data stored in ModelAndView object is by default stored in request object (though you can configure for session)
 		mv.addObject("intr",interest);
 		mv.addObject("net",net);
 		//return this ModelAndView object to front controller (DispatcherServlet)
 		return mv;
 		
 	}
+	*/
 	/*
 	@RequestMapping("compute")	//for  a request with url "compute" this method will called
 	public void computeInterest(@RequestParam("t1") int amount, @RequestParam("t2") int time, HttpServletResponse response) {	//the value of request parameter t1 should be stored to amount, t2 to time
